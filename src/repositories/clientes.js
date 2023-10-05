@@ -3,7 +3,8 @@ const Cliente = require("../models/clientes");
 class RepositoryCliente{
     async PegarUm(id){
         return Cliente.findOne({
-            where:{ id }
+            where:{ id },
+            include: ['Cachorros']
         });
     }
 

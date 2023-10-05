@@ -1,15 +1,16 @@
 const { describe, expect, it } = require("@jest/globals");
 const ServiceCliente = require("../src/services/clientes");
+const conexao = require("../src/database")
 
 describe("Testando a funcionalidade do banco", () => {
     const service = new ServiceCliente();
-
+    let save;
     beforeAll(async () => {
-        console.info("Iniciando os Testes");
+        this.save = await conexao.transaction()
     });
 
     afterAll(() => {
-        console.info("Encerrando os testes");
+        this.save.rollback();
     });
 
     it("Should add a client", () => {

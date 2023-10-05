@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../database");
+const Cachorro = require("./cachorros");
 
 const Cliente = sequelize.define('clientes', {
     id: {
@@ -14,10 +15,13 @@ const Cliente = sequelize.define('clientes', {
         unique: true,
         allowNull: false,
         type: DataTypes.STRING,
-    }
+    },
 }, {
     createdAt: false,
     updatedAt: false
 });
+
+Cachorro.belongsTo(Cliente);
+Cliente.hasMany(Cachorro);
 
 module.exports = Cliente;
