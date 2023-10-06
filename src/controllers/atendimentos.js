@@ -42,7 +42,7 @@ class ControllerAtendimento{
 
     async Update(req, res){
         try{
-            servico.Update(req.params.id, req.body.valor, req.body.idCachorro, req.body.status);
+            servico.Update(req.params.id, req.body.status);
 
             res.status(200).json({
                 message: "Atendimento alterado com sucesso"
@@ -54,7 +54,7 @@ class ControllerAtendimento{
 
     async Delete(req, res){
         try{
-            servico.Delete(req.params.idAtendimentos);
+            servico.Delete(req.params.id);
         
             res.status(200).json({
                 message: "Atendimento deletado com sucesso"

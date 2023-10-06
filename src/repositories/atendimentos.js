@@ -22,10 +22,8 @@ class RepositoryAtendimento{
         });
     }
 
-    async Update(idAtendimentos, valor,idCachorro, status){
+    async Update(idAtendimentos, status){
         return Atendimento.update({
-            valor,
-            idCachorro,
             status
         }, {
             where: { idAtendimentos }

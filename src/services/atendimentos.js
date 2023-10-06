@@ -19,13 +19,13 @@ class ServiceAtendimento{
         repositorio.Add(horario, valor, idCachorro, status);
     }
 
-    async Update(idAtendimentos, valor,idCachorro, status){
-        if(!valor || isNaN(idCachorro) || status == ""){
+    async Update(idAtendimentos, status){
+        if(status == ""){
             throw new Error("Favor preencher todos os dados");
         }else if(idAtendimentos < 0 || isNaN(idAtendimentos)){
             throw new Error("Favor preencher corretamente o id");
         }
-        repositorio.Update(idAtendimentos, valor, idCachorro, status);
+        repositorio.Update(idAtendimentos, status);
     }
 
     async Delete(idAtendimentos){
