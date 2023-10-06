@@ -1,9 +1,11 @@
 const express = require('express');
 const ControllerCachorro = require('../controllers/cachorros');
 const ControllerCliente = require("../controllers/clientes");
+const ControllerAtendimento = require("../controllers/atendimentos")
 
 const clientesController = new ControllerCliente();
 const cachorrosController = new ControllerCachorro();
+const atendimentosController = new ControllerAtendimento();
 const router = express.Router();
 
 router.get('/api/clientes/', clientesController.PegarTodos);
@@ -18,5 +20,11 @@ router.get('/api/cachorro/:id', cachorrosController.PegarUm);
 router.post('/api/cachorro', cachorrosController.Add);
 router.put('/api/cachorro/:id', cachorrosController.Update);
 router.delete('/api/cachorro/:id', cachorrosController.Delete);
+
+router.get('/api/atendimentos/', atendimentosController.PegarTodos);
+router.get('/api/atendimento/:id', atendimentosController.PegarUm);
+router.post('/api/atendimento', atendimentosController.Add);
+router.put('/api/atendimento/:id', atendimentosController.Update);
+router.delete('/api/atendimento/:id', atendimentosController.Delete);
 
 module.exports = router;

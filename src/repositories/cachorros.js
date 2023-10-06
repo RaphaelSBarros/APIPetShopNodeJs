@@ -1,10 +1,12 @@
 const Cachorro = require("../models/cachorros");
+const Atendimento = require("../models/atendimentos");
 
 class RepositoryCachorro{
 
     async PegarUm(id){
         return Cachorro.findOne({
-            where: { id } 
+            where: { id },
+            include: [ Atendimento ]
         });
     }
 
