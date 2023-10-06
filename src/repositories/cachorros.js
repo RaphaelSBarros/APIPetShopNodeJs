@@ -1,9 +1,10 @@
 const Cachorro = require("../models/cachorros");
 
 class RepositoryCachorro{
+
     async PegarUm(id){
         return Cachorro.findOne({
-            where: { id }
+            where: { id } 
         });
     }
 
@@ -11,10 +12,10 @@ class RepositoryCachorro{
         return Cachorro.findAll();
     }
 
-    async Add(nome, idDono){
+    async Add(nome, dono){
         return Cachorro.create({
             nome,
-            idDono
+            dono
         });
     }
 

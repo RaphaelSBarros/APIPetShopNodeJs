@@ -1,15 +1,24 @@
 const Cliente = require("../models/clientes");
+const Cachorro = require("../models/cachorros")
 
 class RepositoryCliente{
-    async PegarUm(id){
+
+    async PegarUm(id, transaction){
         return Cliente.findOne({
             where:{ id },
-            include: ['Cachorros']
+            transaction,
+            include: [ Cachorro ]
         });
     }
 
     async PegarTodos(){
         return Cliente.findAll();
+    }
+
+    async PegarCachorros(dono){
+        return Cachorro.findAll({
+            where: { dono: dono }
+        });
     }
 
     async Add(nome, telefone){

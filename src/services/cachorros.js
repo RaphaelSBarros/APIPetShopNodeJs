@@ -12,11 +12,11 @@ class ServiceCachorro{
         return repositorio.PegarTodos();
     }
 
-    async Add(nome, idDono){
-        if(nome == "" || isNaN(idDono)){
+    async Add(nome, dono){
+        if(nome == "" || isNaN(dono)){
             throw new Error("Favor preencher todos os dados");
         }
-        repositorio.Add(nome, idDono);
+        repositorio.Add(nome, dono);
     }
 
     async Update(id, nome){

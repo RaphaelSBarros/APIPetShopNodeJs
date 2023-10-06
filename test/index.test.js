@@ -1,10 +1,9 @@
-const { describe, expect, it } = require("@jest/globals");
+const { describe, expect, it, beforeAll, afterAll } = require("@jest/globals");
 const ServiceCliente = require("../src/services/clientes");
-const conexao = require("../src/database")
+const conexao = require("../src/database");
 
 describe("Testando a funcionalidade do banco", () => {
-    const service = new ServiceCliente();
-    let save;
+    
     beforeAll(async () => {
         this.save = await conexao.transaction()
     });
@@ -13,11 +12,21 @@ describe("Testando a funcionalidade do banco", () => {
         this.save.rollback();
     });
 
-    it("Should add a client", () => {
-        const qtde = service.PegarTodos().length;
-        service.Add("Carlos", "(00)93333-3333");
-        const qtdeAfter = service.PegarTodos().length;
-
-        expect(qtdeAfter).toBe(qtde+1);
-    });
+    it('Should get client', async () => {
+        const result = await servico.PegarUm(5, this.save)
+  
+        expect(result.id).toBe(1);
+        expect(result.nome).toBe('joao');
+        expect(result.telefone).toBe('teste@teste.com');
+     });
+  
+     it('Should create a client', async () => {
+        const result = await servico.Add({
+           nome: 'joao',
+           telefone: '(00)92222-2222',
+        }, this.save)
+  
+        expect(result.nome).toBe('joao');
+        expect(result.telefone).toBe('(00)92222-2222');
+     });
 });

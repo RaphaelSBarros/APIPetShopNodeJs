@@ -9,7 +9,7 @@ class ControllerCliente{
             const result = await servico.PegarUm(req.params.id);
 
             res.status(200).json({
-                nome: result
+                dados: result
             });
         }catch(error){
             res.status(500).json({ message: "Erro ao pegar um nome "});
@@ -27,6 +27,19 @@ class ControllerCliente{
             res.status(500).json({ message: "Erro ao listar nomes "});
         }
     }
+
+    async PegarCachorros(req, res){
+        try{
+            const result = await servico.PegarCachorros(req.params.dono);
+
+            res.status(200).json({
+                dados: result
+            });
+        }catch(error){
+            res.status(500).json({ message: "Erro ao encontrar cachorros "});
+        }
+    }
+
     async Add(req, res){
         try{
             servico.Add(req.body.nome, req.body.telefone);

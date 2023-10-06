@@ -12,6 +12,10 @@ class ServiceCliente{
         return repositorio.PegarTodos();
     }
 
+    async PegarCachorros(dono){
+        return repositorio.PegarCachorros(dono);
+    }
+
     async Add(nome, telefone){
         if(nome == "" || telefone == ""){
             throw new Error("Favor preencher todos os dados");

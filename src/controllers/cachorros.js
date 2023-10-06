@@ -30,7 +30,7 @@ class ControllerCachorro{
 
     async Add(req, res){
         try{
-            servico.Add(req.body.nome, req.body.idDono);
+            servico.Add(req.body.nome, req.body.dono);
 
             res.status(201).json({
                 message: "Adicionado com sucesso"

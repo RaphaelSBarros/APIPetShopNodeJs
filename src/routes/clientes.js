@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.get('/api/clientes/', clientesController.PegarTodos);
 router.get('/api/cliente/:id', clientesController.PegarUm);
+router.get('/api/cliente/pets/:dono', clientesController.PegarCachorros);
 router.post('/api/cliente', clientesController.Add);
 router.put('/api/cliente/:id', clientesController.Update);
 router.delete('/api/cliente/:id', clientesController.Delete);

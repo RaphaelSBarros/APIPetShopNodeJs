@@ -15,13 +15,13 @@ const Cliente = sequelize.define('clientes', {
         unique: true,
         allowNull: false,
         type: DataTypes.STRING,
-    },
+    }
 }, {
     createdAt: false,
     updatedAt: false
 });
 
-Cachorro.belongsTo(Cliente);
-Cliente.hasMany(Cachorro);
+Cachorro.belongsTo(Cliente, { foreignKey: 'dono' });
+Cliente.hasMany(Cachorro, { foreignKey: 'dono' });
 
 module.exports = Cliente;
