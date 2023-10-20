@@ -1,15 +1,15 @@
-const ServiceUsuario = require("../services/clientes");
+const ServiceAtendente = require("../services/clientes");
 
-const servico = new ServiceUsuario();
+const servico = new ServiceAtendente();
 
-class ControllerUsuario{
+class ControllerAtendente{
 
     async Login(req, res){
         const { email, senha } = req.body;
 
-        const { dataValues: usuario } = await servico.PegarUmPorEmail(email);
+        const { dataValues: atendente } = await servico.PegarUmPorEmail(email);
 
-        if(!usuario){
+        if(!atendente){
             return res.status(401).json({ message: "Credenciais inválidas" });
         }
 
@@ -18,7 +18,7 @@ class ControllerUsuario{
         }
 
         const token = jwt.sign(
-            { id: usuario.id, email: usuario.email },
+            { id: atendente.id, email: atendente.email },
             config.secret
         );
 
@@ -33,7 +33,7 @@ class ControllerUsuario{
                 nome: result
             });
         }catch(error){
-            res.status(500).json({ message: "Erro ao pegar usuario" })
+            res.status(500).json({ message: "Erro ao pegar atendente" })
         }
     }
 
@@ -45,7 +45,7 @@ class ControllerUsuario{
                 nome: result
             });
         }catch(error){
-            res.status(500).json({ message: "Erro ao listar usuarios" })
+            res.status(500).json({ message: "Erro ao listar atendentes" })
         }
     }
 
@@ -86,4 +86,4 @@ class ControllerUsuario{
     }
 }
 
-module.exports = ControllerUsuario;
+module.exports = ControllerAtendente;

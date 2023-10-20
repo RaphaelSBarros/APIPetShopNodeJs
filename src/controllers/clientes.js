@@ -1,8 +1,32 @@
 const ServiceCliente = require("../services/clientes");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const config = require("../config");
 
 const servico = new ServiceCliente();
 
 class ControllerCliente{
+
+    async Login(req, res){
+        const { email, senha } = req.body;
+
+        const { DataValues: cliente } = await servico.PegarUmPorEmail(email);
+
+        if(!cliente){
+            return res.status(401).json({ message: "Credenciais inválidas" });
+        }
+
+        if(!(await bcrypt.compare(senha, cliente.senha))){
+            return res.status(401).json({ message: "Credenciais inválidas"});
+        }
+
+        const token = jwt.sign(
+            { id: cliente.id, nome: cliente.nome, email: cliente.email },
+            config.secret
+        );
+
+        res.json({ message: "Login bem-sucedido", token });
+    }
 
     async PegarUm(req, res){
         try{
