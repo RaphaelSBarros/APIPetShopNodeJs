@@ -1,4 +1,7 @@
 const express = require('express');
+
+const authMiddleware = require("../middleware/auth");
+
 const ControllerCachorro = require('../controllers/cachorros');
 const ControllerCliente = require("../controllers/clientes");
 const ControllerAtendimento = require("../controllers/atendimentos");
