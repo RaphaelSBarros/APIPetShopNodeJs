@@ -11,12 +11,6 @@ class RepositoryCliente{
         });
     }
 
-    async PegarUmPorEmail(email){
-        return Cliente.findOne({
-            where: { email }
-        });
-    }
-
     async PegarTodos(){
         return Cliente.findAll();
     }

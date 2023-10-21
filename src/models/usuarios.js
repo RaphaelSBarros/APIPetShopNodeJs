@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../database");
 
-const Atendente = sequelize.define('atendentes', {
+const Usuario = sequelize.define('usuarios', {
     id: {
         primaryKey: true,
         type: DataTypes.INTEGER,
@@ -14,16 +14,13 @@ const Atendente = sequelize.define('atendentes', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    idCliente: {
+    permissao: {
         type: DataTypes.INTEGER,
-        references: {
-            model: 'clientes',
-            key: 'id'
-        }
+        allowNull: false
     }
 }, {
     createdAt: false,
     updatedAt: false
 });
 
-module.exports = Atendente;
+module.exports = Usuario;

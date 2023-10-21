@@ -5,15 +5,17 @@ const authMiddleware = require("../middleware/auth");
 const ControllerCachorro = require('../controllers/cachorros');
 const ControllerCliente = require("../controllers/clientes");
 const ControllerAtendimento = require("../controllers/atendimentos");
-const ControllerAtendentes = require("../controllers/atendentes");
+const ControllerUsuarios = require("../controllers/usuarios");
 
 const clientesController = new ControllerCliente();
 const cachorrosController = new ControllerCachorro();
 const atendimentosController = new ControllerAtendimento();
-const atendentesController = new ControllerAtendentes();
+const usuariosController = new ControllerUsuarios();
+
 const router = express.Router();
 
-router.post('/api/clientes/login/', clientesController.Login);
+router.post('/api/login', usuariosController.Login);
+
 router.get('/api/clientes/', authMiddleware, clientesController.PegarTodos);
 router.get('/api/cliente/:id', authMiddleware, clientesController.PegarUm);
 router.get('/api/cliente/pets/:dono',authMiddleware,  clientesController.PegarCachorros);
@@ -33,10 +35,7 @@ router.post('/api/atendimento', authMiddleware, atendimentosController.Add);
 router.put('/api/atendimento/:id', authMiddleware, atendimentosController.Update);
 router.delete('/api/atendimento/:id', authMiddleware, atendimentosController.Delete);
 
-router.get('/api/atendentes/', atendentesController.PegarTodos);
-router.get('/api/atendente/:id', atendentesController.PegarUm);
-router.post('/api/atendente', atendentesController.Add);
-router.put('/api/atendente/:id', atendentesController.Update);
-router.delete('/api/atendente/:id', atendentesController.Delete);
+//router.post('/api/usuario/cliente', authMiddleware, usuariosController.AddCliente);
+//router.post('/api/usuario/atendente', authMiddleware, usuariosController.AddAtendente);
 
 module.exports = router;

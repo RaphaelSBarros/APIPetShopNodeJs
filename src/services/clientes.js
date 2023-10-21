@@ -8,10 +8,6 @@ class ServiceCliente{
         return repositorio.PegarUm(id);
     }
 
-    async PegarUmPorEmail(email){
-        return repositorio.PegarUmPorEmail(email);
-    }
-
     async PegarTodos(){
         return repositorio.PegarTodos();
     }
