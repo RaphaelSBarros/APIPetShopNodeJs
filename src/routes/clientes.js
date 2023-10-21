@@ -24,17 +24,19 @@ router.delete('/api/cliente/:id', authMiddleware, authFuncionario, clientesContr
 router.get('/api/cachorros/', authMiddleware, authCliente, cachorrosController.PegarTodos);
 router.get('/api/cachorro/:id', authMiddleware, authCliente, cachorrosController.PegarUm);
 router.post('/api/cachorro', authMiddleware, authCliente, cachorrosController.Add);
-router.put('/api/cachorro/:id', authMiddleware, authCliente, cachorrosController.Update);
-router.delete('/api/cachorro/:id', authMiddleware, authCliente, cachorrosController.Delete);
+router.put('/api/cachorro/:id', authMiddleware, authFuncionario, cachorrosController.Update);
+router.delete('/api/cachorro/:id', authMiddleware, authFuncionario, cachorrosController.Delete);
 
 router.get('/api/atendimentos/', authMiddleware, authFuncionario, atendimentosController.PegarTodos);
 router.get('/api/atendimento/:id', authMiddleware, authFuncionario, atendimentosController.PegarUm);
-router.post('/api/atendimento', authMiddleware, authFuncionario, atendimentosController.Add);
-router.put('/api/atendimento/:id', authMiddleware, authFuncionario, atendimentosController.Update);
-router.delete('/api/atendimento/:id', authMiddleware, authFuncionario, atendimentosController.Delete);
+router.post('/api/atendimento', authMiddleware, atendimentosController.Add);
+router.put('/api/atendimento/:id', authMiddleware, authAdm, atendimentosController.Update);
+router.delete('/api/atendimento/:id', authMiddleware, authAdm, atendimentosController.Delete);
 
 router.post('/api/usuario/cliente', authMiddleware, authFuncionario, usuariosController.AddCliente);
 router.post('/api/usuario/funcionario', authMiddleware, authAdm, usuariosController.AddAtendente);
+router.put('/api/usuario/:id', authMiddleware, authAdm, usuariosController.Update);
+router.delete('/api/usuario/:id', authMiddleware, authAdm, usuariosController.Delete);
 
 router.post('/api/login', usuariosController.Login);
 

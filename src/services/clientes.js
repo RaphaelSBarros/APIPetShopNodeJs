@@ -31,6 +31,7 @@ class ServiceCliente{
         }
         repositorio.Update(id, nome, telefone);
     }
+    
     async Delete(id){
         if(id < 0 || isNaN(id)){
             throw new Error("Favor preencher corretamente o id");

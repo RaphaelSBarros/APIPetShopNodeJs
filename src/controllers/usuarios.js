@@ -8,6 +8,7 @@ const servico = new ServiceUsuario();
 class ControllerUsuario{
 
     async Login(req, res){
+        try{
         const { email, senha } = req.body;
 
         const { dataValues: usuario } = await servico.PegarUmPorEmail(email);
@@ -26,6 +27,9 @@ class ControllerUsuario{
         );
 
         res.json({ message: 'Login Bem-Sucedido', token });
+        }catch(error){
+            res.status(500).json({ message: error.message });
+        }
     }
 
     async AddAtendente(req, res){
@@ -45,6 +49,29 @@ class ControllerUsuario{
             res.status(201).json({ message: "Adicionado com sucesso!" });
         }catch(error){
             res.status(500).json({ message: error.message });
+        }
+    }
+
+    async Update(req, res){
+        try{
+            servico.Update(req.params.id, req.body.email, req.body.senha);
+
+            res.status(200).json({
+                message: "Alterado com sucesso"
+            });
+        }catch(error){
+            res.status(500).json({ message: "Erro ao alterar" });
+        }
+    }
+
+    async Delete(req, res){
+        try{
+            servico.Delete(req.params.id);
+            res.status(200).json({
+                message: "Deletado com sucesso"
+            });
+        }catch(error){
+            res.status(500).json({ message: "Erro ao deletar" });
         }
     }
 }

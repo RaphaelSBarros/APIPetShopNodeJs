@@ -20,6 +20,21 @@ class RepositoryUsuario{
             permissao
         });
     }
+
+    async Update(id, email, senha){
+        return Usuario.update({
+            email,
+            senha
+        },{
+            where: { id }
+        });
+    }
+
+    async Delete(id){
+        return Usuario.destroy({
+            where: { id }
+        });
+    }
 }
 
 module.exports = RepositoryUsuario;
