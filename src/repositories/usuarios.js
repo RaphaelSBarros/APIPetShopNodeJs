@@ -2,7 +2,7 @@ const Usuario = require("../models/usuarios");
 const bcrypt = require('bcrypt')
 
 
-class RepositoryUsuarios{
+class RepositoryUsuario{
 
     async PegarUmPorEmail(email){
         return Usuario.findOne({
@@ -10,15 +10,16 @@ class RepositoryUsuarios{
         });
     }
 
-    /*async Add(usuario, permissao){
-        const hashSenha = await bcrypt.hash(usuario.senha, 10)
-        usuario.senha = hashSenha;
-        const result = await Usuario.create(
-            usuario,
+    async Add(email, senha, permissao){
+        const hashSenha = await bcrypt.hash(senha, 10);
+        senha = hashSenha;
+        console.log(email, hashSenha, permissao);
+        return Usuario.create({
+            email,
+            senha,
             permissao
-        )
-        return result;
-    }*/
+        });
+    }
 }
 
-module.exports = RepositoryUsuarios;
+module.exports = RepositoryUsuario;

@@ -22,8 +22,8 @@ const Cliente = sequelize.define('clientes', {
     updatedAt: false
 });
 
-Cachorro.belongsTo(Cliente, { foreignKey: 'dono' });
-Cliente.hasMany(Cachorro, { foreignKey: 'dono' });
+Cachorro.belongsTo(Cliente, { foreignKey: 'idCliente' });
+Cliente.hasMany(Cachorro, { foreignKey: 'idCliente' });
 
 
 module.exports = Cliente;

@@ -8,7 +8,8 @@ const Usuario = sequelize.define('usuarios', {
     },
     email: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     senha: {
         type: DataTypes.STRING,

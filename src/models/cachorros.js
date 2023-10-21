@@ -11,7 +11,7 @@ const Cachorro = sequelize.define('cachorros', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    dono: {
+    idCliente: {
         type: DataTypes.INTEGER,
         references: {
             model: 'clientes',

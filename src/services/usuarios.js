@@ -10,9 +10,10 @@ class ServiceUsuario{
         return repositorio.PegarUmPorEmail(email)
     }
 
-    /*async Add(usuario, permissao){
-        repositorio.Add(usuario, permissao);
-    }*/
+    async Add(email, senha, permissao){
+        console.log(email, senha, permissao);
+        return repositorio.Add(email, senha, permissao);
+    }
 }
 
 module.exports = ServiceUsuario;

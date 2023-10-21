@@ -13,50 +13,40 @@ class ControllerUsuario{
         const { dataValues: usuario } = await servico.PegarUmPorEmail(email);
 
         if(!usuario){
-            return res.status(401).json({ message: "Credenciais inválidas1" });
+            return res.status(401).json({ message: "Credenciais inválidas" });
         }
-        console.log(usuario.senha, senha);
+
         if(!(await bcrypt.compare(senha, usuario.senha))){
-            return res.status(401).json({ message: "Credenciais inválidas2" });
+            return res.status(401).json({ message: "Credenciais inválidas" });
         }
 
         const token = jwt.sign(
-            { id: usuario.id, email: usuario.email },
+            { id: usuario.id, email: usuario.email, permissao: usuario.permissao },
             config.secret
         );
 
         res.json({ message: 'Login Bem-Sucedido', token });
     }
 
-    /*async AddAtendente(req, res){
+    async AddAtendente(req, res){
         try{
-            const { usuario } = req.body;
-
-            await servico.Add(usuario);
+            await servico.Add(req.body.email, req.body.senha, 2);
 
             res.status(201).json({ message: "Adicionado com sucesso!" });
         }catch(error){
-            if(error.parent.code === "ER_DUP_ENTRY"){
-                res.status(500).json({ message: "Email já cadastrado!" });
-            }
-            res.status(500).json({ message:  "Erro ao cadastrar" });
+            res.status(500).json({ message: error.message });
         }
     }
 
     async AddCliente(req, res){
         try{
-            const { usuario } = req.body;
-            
-            await servico.Add(usuario);
+            await servico.Add(req.body.email, req.body.senha, 1);
 
             res.status(201).json({ message: "Adicionado com sucesso!" });
         }catch(error){
-            if(error.parent.code === "ER_DUP_ENTRY"){
-                res.status(500).json({ message: "Email já cadastrado!" });
-            }
-            res.status(500).json({ message: "Erro ao cadastrar" });
+            res.status(500).json({ message: error.message });
         }
-    }*/
+    }
 }
 
 module.exports = ControllerUsuario;
